@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+    body{line-height:1.6;color:#333;background:#f4f4f4;scroll-behavior:smooth;}
+    a{text-decoration:none;color:inherit;}
+    
+    /* Navbar */
+    header{background:#0077cc;color:white;position:sticky;top:0;z-index:1000;}
+    .container{max-width:1200px;margin:auto;padding:0 20px;}
+    nav{display:flex;justify-content:space-between;align-items:center;padding:15px 0;}
+    .logo{font-weight:bold;font-size:1.5rem;}
+    .nav-links{list-style:none;display:flex;gap:25px;}
+    .nav-links li a{transition:0.3s;}
+    .nav-links li a:hover{color:#ffcc00;}
+    .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;}
+    .hamburger div{width:25px;height:3px;background:white;}
+    
+    /* Sections */
+    section{padding:80px 20px;text-align:center;}
+    #about img{width:150px;height:150px;border-radius:50%;margin-bottom:20px;}
+    
+    /* Projects */
+    .projects-container{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+    .project-card{background:#fff;padding:20px;border-radius:10px;flex:1 1 300px;max-width:320px;transition:transform 0.3s, box-shadow 0.3s;}
+    .project-card:hover{transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,0.2);}
+    .project-card h3{margin-bottom:10px;}
+    
+    /* To-Do List */
+    #todo-list{list-style:none;margin-top:10px;padding-left:0;}
+    #todo-list li{background:#eaeaea;margin:5px 0;padding:8px;border-radius:5px;cursor:pointer;transition:0.2s;}
+    #todo-list li:hover{background:#d4d4d4;text-decoration:line-through;}
+    
+    /* Calculator */
+    .calc-btn{padding:10px 15px;margin:5px;border:none;background:#0077cc;color:white;border-radius:5px;cursor:pointer;transition:0.3s;}
+    .calc-btn:hover{background:#005fa3;}
+    #calc-display{width:100%;padding:10px;margin-bottom:10px;font-size:1rem;text-align:right;}
+    
+    /* Contact */
+    form{max-width:500px;margin:auto;display:flex;flex-direction:column;gap:15px;}
+    input,textarea{padding:10px;border:1px solid #ccc;border-radius:5px;width:100%;}
+    button[type="submit"]{padding:10px;border:none;background:#0077cc;color:white;font-weight:bold;border-radius:5px;cursor:pointer;transition:0.3s;}
+    button[type="submit"]:hover{background:#005fa3;}
+    
+    footer{background:#222;color:white;text-align:center;padding:20px 0;}
+    
+    /* Responsive */
+    @media(max-width:768px){
+      .nav-links{flex-direction:column;display:none;width:100%;background:#0077cc;position:absolute;top:60px;left:0;}
+      .nav-links.active{display:flex;}
+      .hamburger{display:flex;}
+    }
+    @media(max-width:480px){
+      h1,h2{font-size:1.5rem;}
+      button{font-size:0.9rem;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">MyPortfolio</div>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about">
+    <h1>About Me</h1>
+    <img src="js.png copy.jpeg" alt="Profile Picture">
+    <p>Hello! I'm Anjali Kumari Yadav, a web development enthusiast. I create interactive and responsive websites.</p>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-container">
+
+      <!-- To-Do List -->
+      <div class="project-card">
+        <h3>To-Do List</h3>
+        <p>Add, delete, and mark tasks as done.</p>
+        <input type="text" id="todo-input" placeholder="New Task">
+        <button onclick="addTodo()">Add Task</button>
+        <ul id="todo-list"></ul>
+      </div>
+
+      <!-- Calculator -->
+      <div class="project-card">
+        <h3>Calculator</h3>
+        <input type="text" id="calc-display" placeholder="0" readonly>
+        <div>
+          <button class="calc-btn" onclick="press('1')">1</button>
+          <button class="calc-btn" onclick="press('2')">2</button>
+          <button class="calc-btn" onclick="press('3')">3</button>
+          <button class="calc-btn" onclick="press('+')">+</button>
+        </div>
+        <div>
+          <button class="calc-btn" onclick="press('4')">4</button>
+          <button class="calc-btn" onclick="press('5')">5</button>
+          <button class="calc-btn" onclick="press('6')">6</button>
+          <button class="calc-btn" onclick="press('-')">-</button>
+        </div>
+        <div>
+          <button class="calc-btn" onclick="press('7')">7</button>
+          <button class="calc-btn" onclick="press('8')">8</button>
+          <button class="calc-btn" onclick="press('9')">9</button>
+          <button class="calc-btn" onclick="press('*')">*</button>
+        </div>
+        <div>
+          <button class="calc-btn" onclick="press('0')">0</button>
+          <button class="calc-btn" onclick="press('.')">.</button>
+          <button class="calc-btn" onclick="calculate()">=</button>
+          <button class="calc-btn" onclick="clearCalc()">C</button>
+        </div>
+      </div>
+
+      <!-- Color Changer -->
+      <div class="project-card">
+        <h3>Color Changer</h3>
+        <p>Click button to change background color.</p>
+        <button onclick="changeColor()">Change Color</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Anjali Kumari Yadav.
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Hamburger Menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', ()=> navLinks.classList.toggle('active'));
+
+    // Contact Form
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', e => { e.preventDefault(); alert('Message sent!'); form.reset(); });
+
+    // To-Do List
+    function addTodo(){
+      const input = document.getElementById('todo-input');
+      const list = document.getElementById('todo-list');
+      if(input.value.trim() !== ''){
+        const li = document.createElement('li');
+        li.textContent = input.value;
+        li.onclick = () => li.remove();
+        list.appendChild(li);
+        input.value = '';
+      }
+    }
+    document.getElementById('todo-input').addEventListener('keypress', e => { if(e.key === 'Enter') addTodo(); });
+
+    // Calculator
+    let calc = '';
+    function press(val){ calc += val; document.getElementById('calc-display').value = calc; }
+    function clearCalc(){ calc = ''; document.getElementById('calc-display').value = '0'; }
+    function calculate(){ try { calc = eval(calc); document.getElementById('calc-display').value = calc; } catch { document.getElementById('calc-display').value = 'Error'; calc = ''; } }
+
+    // Color Changer
+    function changeColor(){
+      const colors = ['#f1c40f','#e74c3c','#2ecc71','#3498db','#9b59b6','#e67e22','#1abc9c'];
+      document.body.style.background = colors[Math.floor(Math.random()*colors.length)];
+    }
+  </script>
+
+</body>
+</html>
